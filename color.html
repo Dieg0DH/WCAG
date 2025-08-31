@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Palete Generator</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>WCAG Color Palette Generator</h1>
+        <p>Create accessible color palettes that meet WCAG standards</p>
+      </header>
+
+      <main>
+        <section class="palette-section">
+          <h2>Color Palette</h2>
+          <div class="palette-controls">
+            <button id="addColorBtn" class="btn btn-primary">
+              + Add Color
+            </button>
+            <button id="generatePaletteBtn" class="btn btn-secondary">
+              Generate Random Palette
+            </button>
+          </div>
+          <div id="colorPalette" class="color-palette"></div>
+        </section>
+
+        <section class="contrast-checker">
+          <h2>Contrast Checker</h2>
+          <div class="contrast-inputs">
+            <div class="color-input-group">
+              <label for="foregroundColor">Text Color</label>
+              <input type="color" id="foregroundColor" value="#000000" />
+              <input
+                type="text"
+                id="foregroundHex"
+                value="#000000"
+                class="hex-input"
+              />
+            </div>
+            <div class="color-input-group">
+              <label for="backgroundColor">Background Color</label>
+              <input type="color" id="backgroundColor" value="#FFFFFF" />
+              <input
+                type="text"
+                id="backgroundHex"
+                value="#FFFFFF"
+                class="hex-input"
+              />
+            </div>
+          </div>
+
+          <div class="contrast-results">
+            <div class="contrast-ratio">
+              <h3>Contrast Ratio</h3>
+              <div id="contrastRatio" class="ratio-display">21:1</div>
+            </div>
+            <div class="wcag-compliance">
+              <div class="compliance-item">
+                <span>Normal Text AA</span>
+                <span id="normalAA" class="status pass">✓ Pass</span>
+              </div>
+              <div class="compliance-item">
+                <span>Normal Text AAA</span>
+                <span id="normalAAA" class="status pass">✓ Pass</span>
+              </div>
+              <div class="compliance-item">
+                <span>Large Text AA</span>
+                <span id="largeAA" class="status pass">✓ Pass</span>
+              </div>
+              <div class="compliance-item">
+                <span>Large Text AAA</span>
+                <span id="largeAAA" class="status pass">✓ Pass</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-section">
+            <h3>Preview</h3>
+            <div id="previewBox" class="preview-box">
+              <p class="preview-normal">
+                Normal text (14px): The quick brown fox jumps over the lazy dog.
+              </p>
+              <p class="preview-large">
+                Large text (18px): The quick brown fox jumps over the lazy dog.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="colorblind-simulator">
+          <h2>Color Blindness Simulator</h2>
+          <div class="simulator-controls">
+            <select id="colorblindType">
+              <option value="normal">Normal Vision</option>
+              <option value="protanopia">Protanopia (Red-blind)</option>
+              <option value="deuteranopia">Deuteranopia (Green-blind)</option>
+              <option value="tritanopia">Tritanopia (Blue-blind)</option>
+              <option value="achromatopsia">
+                Achromatopsia (Total color blindness)
+              </option>
+            </select>
+          </div>
+          <div id="simulatedPalette" class="simulated-palette"></div>
+        </section>
+
+        <section class="export-section">
+          <h2>Export Options</h2>
+          <div class="export-controls">
+            <button id="exportJsonBtn" class="btn btn-primary">
+              Export as JSON
+            </button>
+            <button id="copyAllBtn" class="btn btn-secondary">
+              Copy All HEX Codes
+            </button>
+          </div>
+          <div id="exportResult" class="export-result"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="colorModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Edit Color</h3>
+        <input type="color" id="modalColorPicker" />
+        <input
+          type="text"
+          id="modalHexInput"
+          class="hex-input"
+          placeholder="#000000"
+        />
+        <button id="saveColorBtn" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+
+    <script src=""></script>
+  </body>
+</html>
