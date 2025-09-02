@@ -120,7 +120,7 @@ class ColorBlindnessSimulator {
     exportResult.textContent = jsonString;
     exportResult.classList.add("show");
 
-    // Also download the file
+    // Download the file
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
