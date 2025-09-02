@@ -3,10 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Color Palete Generator</title>
+    <title>WCAG Color Palette Generator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="theme-toggle-container">
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        aria-label="Toggle dark mode"
+      >
+        <div class="toggle-track">
+          <div class="toggle-thumb">
+            <svg
+              class="sun-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+            </svg>
+            <svg
+              class="moon-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </div>
+        </div>
+      </button>
+    </div>
+
     <div class="container">
       <header>
         <h1>WCAG Color Palette Generator</h1>
@@ -81,12 +120,12 @@
             <h3>Preview</h3>
             <div id="previewBox" class="preview-box">
               <p class="preview-normal">
-                Normal text (14px): This is a sample text for the contrast
-                checker.
+                Normal text (14px): Sample text for testing contrast ratio
+                against WCAG 2.1 AA/AAA compliance levels.
               </p>
               <p class="preview-large">
-                Large text (18px): This is a sample text for the contrast
-                checker.
+                Large text (18px): Sample text for testing contrast ratio
+                against WCAG 2.1 AA/AAA compliance levels.
               </p>
             </div>
           </div>
@@ -142,6 +181,7 @@
     <script src="paletteManager.js"></script>
     <script src="contrastChecker.js"></script>
     <script src="colorBlindnessSim.js"></script>
+    <script src="themeToggle.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
