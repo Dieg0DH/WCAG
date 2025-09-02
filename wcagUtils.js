@@ -1,3 +1,4 @@
+// Color manipulation utilities
 const ColorUtils = {
   hexToRgb(hex) {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -15,7 +16,7 @@ const ColorUtils = {
   },
 
   getLuminance(rgb) {
-    const rgRGB = rgb.r / 255;
+    const rsRGB = rgb.r / 255;
     const gsRGB = rgb.g / 255;
     const bsRGB = rgb.b / 255;
 
@@ -51,8 +52,7 @@ const ColorUtils = {
     );
   },
 
-  // Color blindness
-
+  // Color blindness simulation
   simulateColorBlindness(hex, type) {
     const rgb = this.hexToRgb(hex);
     let simulated = { ...rgb };
@@ -87,8 +87,7 @@ const ColorUtils = {
   },
 };
 
-// Main app
-
+// Main application
 class ColorPaletteApp {
   constructor() {
     this.colors = ["#2563eb", "#16a34a", "#dc2626", "#f59e0b", "#8b5cf6"];
@@ -104,6 +103,7 @@ class ColorPaletteApp {
   }
 
   setupEventListeners() {
+    // Palette controls
     document
       .getElementById("addColorBtn")
       .addEventListener("click", () => this.addColor());
@@ -140,7 +140,7 @@ class ColorPaletteApp {
       }
     });
 
-    // Color blindness
+    // Color blindness simulator
     document.getElementById("colorblindType").addEventListener("change", () => {
       this.updateColorBlindnessSimulator();
     });
@@ -148,7 +148,7 @@ class ColorPaletteApp {
     // Export controls
     document
       .getElementById("exportJsonBtn")
-      .addEventListener("click", () => this.exportPaletteAsJson());
+      .addEventListener("click", () => this.exportAsJSON());
     document
       .getElementById("copyAllBtn")
       .addEventListener("click", () => this.copyAllHexCodes());
@@ -191,17 +191,44 @@ class ColorPaletteApp {
     this.colors.forEach((color, index) => {
       const colorCard = document.createElement("div");
       colorCard.className = "color-card";
-      colorCard.innerHTML = `
-            <div class="color-display" style="background-color: ${color}"></div>
-            <div class="color-info">
-                <div class="color-hex">${color.toUpperCase()}</div>
-                <div class="color-actions">
-                    <button onclick="app.editColor(${index})">Edit</button>
-                    <button onclick="app.copyHex('${color}')">Copy</button>
-                    <button onclick="app.removeColor(${index})">Remove</button>
-                </div>
-            </div>
-        `;
+
+      const colorDisplay = document.createElement("div");
+      colorDisplay.className = "color-display";
+      colorDisplay.style.backgroundColor = color;
+
+      const colorInfo = document.createElement("div");
+      colorInfo.className = "color-info";
+
+      const colorHex = document.createElement("div");
+      colorHex.className = "color-hex";
+      colorHex.textContent = color.toUpperCase();
+
+      const colorActions = document.createElement("div");
+      colorActions.className = "color-actions";
+
+      // Event listeners
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.addEventListener("click", () => this.editColor(index));
+
+      const copyBtn = document.createElement("button");
+      copyBtn.textContent = "Copy";
+      copyBtn.addEventListener("click", () => this.copyHex(color));
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.addEventListener("click", () => this.removeColor(index));
+
+      colorActions.appendChild(editBtn);
+      colorActions.appendChild(copyBtn);
+      colorActions.appendChild(removeBtn);
+
+      colorInfo.appendChild(colorHex);
+      colorInfo.appendChild(colorActions);
+
+      colorCard.appendChild(colorDisplay);
+      colorCard.appendChild(colorInfo);
+
       paletteContainer.appendChild(colorCard);
     });
   }
@@ -218,6 +245,8 @@ class ColorPaletteApp {
       this.colors.splice(index, 1);
       this.renderPalette();
       this.updateColorBlindnessSimulator();
+    } else {
+      alert("You must keep at least one color in the palette.");
     }
   }
 
@@ -235,10 +264,202 @@ class ColorPaletteApp {
   saveEditedColor() {
     if (this.currentEditingIndex !== null) {
       const newColor = document.getElementById("modalHexInput").value;
-      this.colors[this.currentEditingIndex] = newColor;
-      this.renderPalette();
-      this.updateColorBlindnessSimulator();
-      document.getElementById("colorModal").style.display = "none";
+      if (/^#[0-9A-F]{6}$/i.test(newColor)) {
+        this.colors[this.currentEditingIndex] = newColor;
+        this.renderPalette();
+        this.updateColorBlindnessSimulator();
+        document.getElementById("colorModal").style.display = "none";
+      } else {
+        alert("Please enter a valid hex color code (e.g., #FF0000)");
+      }
     }
   }
+
+  generateRandomPalette() {
+    this.colors = [];
+    for (let i = 0; i < 5; i++) {
+      this.colors.push(ColorUtils.generateRandomColor());
+    }
+    this.renderPalette();
+    this.updateColorBlindnessSimulator();
+  }
+
+  updateContrastChecker() {
+    const foreground = document.getElementById("foregroundColor").value;
+    const background = document.getElementById("backgroundColor").value;
+
+    const ratio = ColorUtils.getContrastRatio(foreground, background);
+    const ratioDisplay = document.getElementById("contrastRatio");
+    ratioDisplay.textContent = ratio.toFixed(2) + ":1";
+
+    // WCAG tests
+    const normalAA = document.getElementById("normalAA");
+    normalAA.className = ratio >= 4.5 ? "status pass" : "status fail";
+    normalAA.textContent = ratio >= 4.5 ? "✓ Pass" : "✗ Fail";
+
+    const normalAAA = document.getElementById("normalAAA");
+    normalAAA.className = ratio >= 7 ? "status pass" : "status fail";
+    normalAAA.textContent = ratio >= 7 ? "✓ Pass" : "✗ Fail";
+
+    const largeAA = document.getElementById("largeAA");
+    largeAA.className = ratio >= 3 ? "status pass" : "status fail";
+    largeAA.textContent = ratio >= 3 ? "✓ Pass" : "✗ Fail";
+
+    const largeAAA = document.getElementById("largeAAA");
+    largeAAA.className = ratio >= 4.5 ? "status pass" : "status fail";
+    largeAAA.textContent = ratio >= 4.5 ? "✓ Pass" : "✗ Fail";
+
+    // Update preview
+    const previewBox = document.getElementById("previewBox");
+    previewBox.style.backgroundColor = background;
+    previewBox.style.color = foreground;
+  }
+
+  updateColorBlindnessSimulator() {
+    const simulatorType = document.getElementById("colorblindType").value;
+    const simulatedContainer = document.getElementById("simulatedPalette");
+    simulatedContainer.innerHTML = "";
+
+    this.colors.forEach((color) => {
+      const simulatedColor =
+        simulatorType === "normal"
+          ? color
+          : ColorUtils.simulateColorBlindness(color, simulatorType);
+
+      const colorDiv = document.createElement("div");
+      colorDiv.className = "simulated-color";
+      colorDiv.style.backgroundColor = simulatedColor;
+      colorDiv.title = simulatedColor.toUpperCase();
+      simulatedContainer.appendChild(colorDiv);
+    });
+  }
+
+  copyHex(hex) {
+    navigator.clipboard
+      .writeText(hex.toUpperCase())
+      .then(() => {
+        // Notification
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #16a34a;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 6px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+        notification.textContent = `Copied ${hex.toUpperCase()}!`;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.remove();
+        }, 2000);
+      })
+      .catch((err) => {
+        alert("Failed to copy to clipboard");
+      });
+  }
+
+  copyAllHexCodes() {
+    const hexCodes = this.colors.map((color) => color.toUpperCase()).join("\n");
+    navigator.clipboard
+      .writeText(hexCodes)
+      .then(() => {
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #16a34a;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 6px;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+        notification.textContent = "All colors copied!";
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.remove();
+        }, 2000);
+      })
+      .catch((err) => {
+        alert("Failed to copy to clipboard");
+      });
+  }
+
+  exportAsJSON() {
+    const paletteData = {
+      name: "WCAG Color Palette",
+      created: new Date().toISOString(),
+      colors: this.colors.map((color, index) => ({
+        id: index + 1,
+        hex: color.toUpperCase(),
+        rgb: ColorUtils.hexToRgb(color),
+      })),
+      contrastPairs: this.generateContrastPairs(),
+    };
+
+    const jsonString = JSON.stringify(paletteData, null, 2);
+    const exportResult = document.getElementById("exportResult");
+    exportResult.textContent = jsonString;
+    exportResult.classList.add("show");
+
+    // File download
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "wcag-color-palette.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  generateContrastPairs() {
+    const pairs = [];
+    for (let i = 0; i < this.colors.length; i++) {
+      for (let j = i + 1; j < this.colors.length; j++) {
+        const ratio = ColorUtils.getContrastRatio(
+          this.colors[i],
+          this.colors[j]
+        );
+        pairs.push({
+          color1: this.colors[i].toUpperCase(),
+          color2: this.colors[j].toUpperCase(),
+          contrastRatio: ratio.toFixed(2),
+          wcagAA: ratio >= 4.5,
+          wcagAAA: ratio >= 7,
+        });
+      }
+    }
+    return pairs;
+  }
 }
+
+// DOM
+let app;
+document.addEventListener("DOMContentLoaded", () => {
+  app = new ColorPaletteApp();
+});
+
+// Message animation
+const style = document.createElement("style");
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+`;
+document.head.appendChild(style);
