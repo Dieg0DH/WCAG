@@ -42,7 +42,7 @@ class ContrastChecker {
     const ratioDisplay = document.getElementById("contrastRatio");
     ratioDisplay.textContent = ratio.toFixed(2) + ":1";
 
-    // Update WCAG compliance indicators
+    // WCAG tests
     const normalAA = document.getElementById("normalAA");
     normalAA.className = ratio >= 4.5 ? "status pass" : "status fail";
     normalAA.textContent = ratio >= 4.5 ? "✓ Pass" : "✗ Fail";
