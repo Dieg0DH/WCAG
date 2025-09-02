@@ -152,5 +152,93 @@ class ColorPaletteApp {
     document
       .getElementById("copyAllBtn")
       .addEventListener("click", () => this.copyAllHexCodes());
+
+    // Modal controls
+    const modal = document.getElementById("colorModal");
+    const closeBtn = document.querySelector(".close");
+
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    document
+      .getElementById("modalColorPicker")
+      .addEventListener("input", (e) => {
+        document.getElementById("modalHexInput").value = e.target.value;
+      });
+
+    document.getElementById("modalHexInput").addEventListener("input", (e) => {
+      if (/^#[0-9A-F]{6}$/i.test(e.target.value)) {
+        document.getElementById("modalColorPicker").value = e.target.value;
+      }
+    });
+
+    document.getElementById("saveColorBtn").addEventListener("click", () => {
+      this.saveEditedColor();
+    });
+  }
+
+  renderPalette() {
+    const paletteContainer = document.getElementById("colorPalette");
+    paletteContainer.innerHTML = "";
+
+    this.colors.forEach((color, index) => {
+      const colorCard = document.createElement("div");
+      colorCard.className = "color-card";
+      colorCard.innerHTML = `
+            <div class="color-display" style="background-color: ${color}"></div>
+            <div class="color-info">
+                <div class="color-hex">${color.toUpperCase()}</div>
+                <div class="color-actions">
+                    <button onclick="app.editColor(${index})">Edit</button>
+                    <button onclick="app.copyHex('${color}')">Copy</button>
+                    <button onclick="app.removeColor(${index})">Remove</button>
+                </div>
+            </div>
+        `;
+      paletteContainer.appendChild(colorCard);
+    });
+  }
+
+  addColor() {
+    const newColor = ColorUtils.generateRandomColor();
+    this.colors.push(newColor);
+    this.renderPalette();
+    this.updateColorBlindnessSimulator();
+  }
+
+  removeColor(index) {
+    if (this.colors.length > 1) {
+      this.colors.splice(index, 1);
+      this.renderPalette();
+      this.updateColorBlindnessSimulator();
+    }
+  }
+
+  editColor(index) {
+    this.currentEditingIndex = index;
+    const modal = document.getElementById("colorModal");
+    const color = this.colors[index];
+
+    document.getElementById("modalColorPicker").value = color;
+    document.getElementById("modalHexInput").value = color;
+
+    modal.style.display = "block";
+  }
+
+  saveEditedColor() {
+    if (this.currentEditingIndex !== null) {
+      const newColor = document.getElementById("modalHexInput").value;
+      this.colors[this.currentEditingIndex] = newColor;
+      this.renderPalette();
+      this.updateColorBlindnessSimulator();
+      document.getElementById("colorModal").style.display = "none";
+    }
   }
 }
