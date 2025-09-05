@@ -44,15 +44,7 @@
 - Readable text color suggestions
 - Export palettes for design tools
 
-## 🛠️ Tech Stack
-
-- **Frontend**: Vanilla JavaScript (ES6+)
-- **Styling**: Pure CSS with modern Flexbox/Grid
-- **Color Science**: Custom color utilities for WCAG compliance
-- **No Dependencies**: Lightweight and fast
-- **Responsive Design**: Works on all device sizes
-
-## 🚀 Getting Started
+  ## 🚀 Getting Started
 
 1. **Clone the repository**
 
@@ -63,6 +55,16 @@
 
 2. **Open in your browser**
    Simply open `index.html` in your favorite modern web browser
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Vanilla JavaScript (ES6+)
+- **Styling**: Pure CSS with modern Flexbox/Grid
+- **Color Science**: Custom color utilities for WCAG compliance
+- **No Dependencies**: Lightweight and fast
+- **Responsive Design**: Works on all device sizes
+
+
 
 ## 🎯 Usage
 
