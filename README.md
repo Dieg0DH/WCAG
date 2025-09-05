@@ -1,18 +1,14 @@
 # 🎨 WCAG Color Palette Generator
-
-![Screenshot of the application](assets/2.jpg)
-
 <div align="center">
   <p>
     <strong>Create beautiful, accessible color palettes with WCAG compliance in mind</strong>
   </p>
-  <p>
-    <a href="#features">Features</a> •
-    <a href="#tech-stack">Tech Stack</a> •
-    <a href="#getting-started">Getting Started</a> •
-    <a href="#usage">Usage</a> •
-    <a href="#accessibility">Accessibility</a> •
-  </p>
+
+## 📸 Preview
+
+![Screenshot of the application](assets/2.jpg)
+
+
   
 </div>
 
