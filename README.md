@@ -1,5 +1,7 @@
 # 🎨 WCAG Color Palette Generator
 
+![Screenshot of the application](assets/2.jpg)
+
 <div align="center">
   <p>
     <strong>Create beautiful, accessible color palettes with WCAG compliance in mind</strong>
