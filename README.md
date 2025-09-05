@@ -70,23 +70,29 @@
 
 
 
+
+
 ## 🎯 Usage
 
-1. **Creating a Palette**
+<details>
+  <summary><strong>View Usage Instructions</strong></summary>
+  
+  <br>
+  
+  ### 🎨 Creating a Palette
+  - Click "+ Add Color" to add new colors
+  - Use the color picker or enter hex codes directly
+  - Generate random palettes with the "Generate Random Palette" button
 
-   - Click "+ Add Color" to add new colors
-   - Use the color picker or enter hex codes directly
-   - Generate random palettes with the "Generate Random Palette" button
+  ### 🔍 Checking Contrast
+  - Select foreground and background colors
+  - View real-time contrast ratio
+  - Check WCAG compliance for different text sizes
 
-2. **Checking Contrast**
-
-   - Select foreground and background colors
-   - View real-time contrast ratio
-   - Check WCAG compliance for different text sizes
-
-3. **Simulating Color Blindness**
-   - Select a color vision deficiency type from the dropdown
-   - Preview how your palette appears to users with color vision deficiencies
+  ### 🌈 Simulating Color Blindness
+  - Select a color vision deficiency type from the dropdown
+  - Preview how your palette appears to users with color vision deficiencies
+</details>
 
 <div align="center">
   Made with ❤️ for accessible design
