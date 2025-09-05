@@ -44,6 +44,8 @@
 - Readable text color suggestions
 - Export palettes for design tools
 
+
+
   ## 🚀 Getting Started
 
 1. **Clone the repository**
@@ -55,6 +57,8 @@
 
 2. **Open in your browser**
    Simply open `index.html` in your favorite modern web browser
+
+   
 
 ## 🛠️ Tech Stack
 
