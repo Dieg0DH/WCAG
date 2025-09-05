@@ -13,22 +13,26 @@
   
 
 ## ✨ Features
-
-### 🎨 Color Palette Management
+<details>
+  <summary><strong>🎨 Color Palette Management</strong></summary>
 
 - Create and customize color palettes with ease
 - Add/remove colors with a single click
 - Generate random WCAG-compliant color palettes
 - Visual representation of color combinations
+</details>
 
-### 🔍 Contrast Checker
+<details>
+  <summary><strong>🔍 Contrast Checker</strong></summary>
 
 - Real-time WCAG contrast ratio calculation
 - Compliance indicators for different text sizes (AA, AAA)
 - Visual preview of text on background
 - Supports both normal and large text
+</details>
 
-### 🌈 Color Blindness Simulator
+<details>
+  <summary><strong>🌈 Color Blindness Simulator</strong></summary>
 
 - Preview how colors appear with different types of color vision deficiencies
 - Supports common types of color blindness:
@@ -36,13 +40,16 @@
   - Deuteranopia
   - Tritanopia
   - Monochromacy
+</details>
 
-### ♿ Accessibility Tools
+<details>
+  <summary><strong>♿ Accessibility Tools</strong></summary>
 
 - WCAG 2.1 compliance indicators
 - Color contrast validation
 - Readable text color suggestions
 - Export palettes for design tools
+</details>
 
 
 
@@ -59,51 +66,63 @@
    Simply open `index.html` in your favorite modern web browser
 
    
+<details>
+  <summary><strong>🛠️ Tech Stack</strong></summary>
 
-## 🛠️ Tech Stack
 
 - **Frontend**: Vanilla JavaScript (ES6+)
 - **Styling**: Pure CSS with modern Flexbox/Grid
 - **Color Science**: Custom color utilities for WCAG compliance
 - **No Dependencies**: Lightweight and fast
 - **Responsive Design**: Works on all device sizes
+</details>
 
 
 
 <details>
   <summary><strong>🖥️ Usage Tips</strong></summary>
 
+1. **Creating a Palette**
 
-<details>
-  <summary><strong>1. Creating a Palette</strong></summary>
+   - Click "+ Add Color" to add new colors
+   - Use the color picker or enter hex codes directly
+   - Generate random palettes with the "Generate Random Palette" button
+
+2. **Checking Contrast**
+
+   - Select foreground and background colors
+   - View real-time contrast ratio
+   - Check WCAG compliance for different text sizes
+
+3. **Simulating Color Blindness**
+   - Select a color vision deficiency type from the dropdown
+   - Preview how your palette appears to users with color vision deficiencies
   
-  <br>
-  
-  - Click "+ Add Color" to add new colors
-  - Use the color picker or enter hex codes directly
-  - Generate random palettes with the "Generate Random Palette" button
 </details>
 
 <details>
-  <summary><strong>2. Checking Contrast</strong></summary>
-  
-  <br>
-  
-  - Select foreground and background colors
-  - View real-time contrast ratio
-  - Check WCAG compliance for different text sizes
-</details>
+  <summary><strong>🏗️ Project Structure</strong></summary>
 
-<details>
-  <summary><strong>3. Simulating Color Blindness</strong></summary>
-  
   <br>
-  
-  - Select a color vision deficiency type from the dropdown
-  - Preview how your palette appears to users with color vision deficiencies
-</details>
-</details>
 
+  ```text
+  Colors-Web-App/
+  ├── 📁 assets/
+  │   └── 📷 2.jpg
+  │
+  ├── 📄 index.html
+  ├── 📄 style.css
+  ├── 📄 app.js
+  ├── 📄 colorBlindnessSim.js
+  ├── 📄 colorUtils.js
+  ├── 📄 contrastChecker.js
+  ├── 📄 paletteManager.js
+  ├── 📄 themeToggle.js
+  │
+  ├── 📄 package.json
+  └── 📄 README.md
+```
+</details>
 
 <div align="center">
   Made with ❤️ for accessible design
