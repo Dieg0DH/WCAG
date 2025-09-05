@@ -70,7 +70,9 @@
 
 
 
-## 🎯 Usage
+<details>
+  <summary><strong>🖥️ Usage Tips</strong></summary>
+
 
 <details>
   <summary><strong>1. Creating a Palette</strong></summary>
@@ -100,6 +102,8 @@
   - Select a color vision deficiency type from the dropdown
   - Preview how your palette appears to users with color vision deficiencies
 </details>
+</details>
+
 
 <div align="center">
   Made with ❤️ for accessible design
