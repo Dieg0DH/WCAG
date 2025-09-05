@@ -3,6 +3,7 @@
   <p>
     <strong>Create beautiful, accessible color palettes with WCAG compliance in mind</strong>
   </p>
+</div>
 
 ## 📸 Preview
 
@@ -10,7 +11,6 @@
 
 
   
-</div>
 
 ## ✨ Features
 
